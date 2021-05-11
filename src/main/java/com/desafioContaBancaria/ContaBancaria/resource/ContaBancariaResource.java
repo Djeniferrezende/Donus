@@ -1,6 +1,7 @@
 package com.desafioContaBancaria.ContaBancaria.resource;
 
 import com.desafioContaBancaria.ContaBancaria.entities.ContaBancaria;
+import com.desafioContaBancaria.ContaBancaria.entities.Deposito;
 import com.desafioContaBancaria.ContaBancaria.service.ContaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class ContaBancariaResource {
 
 
     @GetMapping
-    public ResponseEntity<List<ContaBancaria>> findAll(){
+    public ResponseEntity<List<ContaBancaria>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
@@ -29,28 +30,28 @@ public class ContaBancariaResource {
     }
 
     //deletar usuario
-    @DeleteMapping( value = "/{id}")
-    public  ResponseEntity<Void> deletar(@PathVariable Long id){
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
-    //precisa ser revisto
-    @PutMapping(value ="/{id}")
-    public ResponseEntity<ContaBancaria> update(@PathVariable Long id, @RequestBody ContaBancaria conta){
-        return ResponseEntity.ok().body(service.update(id));
-    }
 
     @PostMapping
-    public ResponseEntity<ContaBancaria> salvar(@RequestBody ContaBancaria conta){
+    public ResponseEntity<ContaBancaria> salvar(@RequestBody ContaBancaria conta) {
 
         return ResponseEntity.ok().body(service.criarNovaConta(conta));
     }
-/*
-    @PostMapping("/deposito")
-    public ResponseEntity<ContaBancaria> depositar( ContaBancaria conta, Double deposito ){
-        conta = service.deposito(deposito);
-        return ResponseEntity.ok().body(conta);
-*/
 
+    @PostMapping("{id}/novo-deposito")
+    public ResponseEntity<ContaBancaria> depositar(@PathVariable Long id, @RequestBody Deposito deposito) {
+        ContaBancaria conta = service.findById(id);
+        service.novoDeposito(conta, deposito);
+        return ResponseEntity.ok().body(conta);
+    }
+
+    @GetMapping("{id}/depositos")
+    public ResponseEntity<List<Deposito>> depositos(@PathVariable Long id) {
+        return ResponseEntity.ok().body(service.findDepositosByConta(id));
+    }
 }

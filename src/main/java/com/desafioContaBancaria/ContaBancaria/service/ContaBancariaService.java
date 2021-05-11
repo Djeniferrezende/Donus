@@ -2,8 +2,11 @@ package com.desafioContaBancaria.ContaBancaria.service;
 
 import com.desafioContaBancaria.ContaBancaria.ValidaCpf;
 import com.desafioContaBancaria.ContaBancaria.entities.ContaBancaria;
+import com.desafioContaBancaria.ContaBancaria.entities.Deposito;
 import com.desafioContaBancaria.ContaBancaria.repository.ContaBancariaRepository;
+import com.desafioContaBancaria.ContaBancaria.repository.DepositoRepository;
 import com.desafioContaBancaria.ContaBancaria.service.exceptions.DatabaseException;
+import com.desafioContaBancaria.ContaBancaria.service.exceptions.InvalidArgumentException;
 import com.desafioContaBancaria.ContaBancaria.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,6 +24,9 @@ public class ContaBancariaService {
 
     @Autowired
     private ContaBancariaRepository repository;
+
+    @Autowired
+    private DepositoRepository depositoRepository;
 
     //listar contas
     public List<ContaBancaria> findAll() {
@@ -83,12 +89,25 @@ public class ContaBancariaService {
 
         return repository.save(conta);
     }
-/*
-    public void deposito(ContaBancaria conta, Double deposito) {
-        if(deposito > 2000){
-            throw new RuntimeException("Valor de deposito superior ao permitido");
+
+    public void novoDeposito(ContaBancaria conta , Deposito deposito) {
+        if( deposito.getValor() > 2000){
+            throw new InvalidArgumentException("Valor de deposito superior ao permitido");
 
         }
-         conta.deposito(deposito);
-    }*/
+        conta.setSaldo(conta.getSaldo() + deposito.getValor());
+        deposito.setConta(conta);
+        repository.save(conta);
+        depositoRepository.save(deposito);
+    }
+
+    //listar contas
+    public List<Deposito> findAllDepositos(){
+        return depositoRepository.findAll();
+    }
+
+    public List<Deposito> findDepositosByConta(Long id){
+        return depositoRepository.findByContaId(id);
+    }
+
 }

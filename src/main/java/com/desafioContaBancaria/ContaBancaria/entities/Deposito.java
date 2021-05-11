@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_transferencia")
-public class Transferencia  {
+public class Deposito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,11 +15,11 @@ public class Transferencia  {
    @JoinColumn(name="conta_id")
     private ContaBancaria conta;
 
-    public Transferencia(){
+    public Deposito(){
 
     }
 
-    public Transferencia(Long id, Double valor, ContaBancaria conta) {
+    public Deposito(Long id, Double valor, ContaBancaria conta) {
         this.id = id;
         Valor = valor;
         this.conta = conta;
@@ -48,4 +48,8 @@ public class Transferencia  {
     public void setConta(ContaBancaria conta) {
         this.conta = conta;
     }
+
+
+
+
 }

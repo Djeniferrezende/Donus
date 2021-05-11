@@ -16,7 +16,7 @@ public class ContaBancaria {
     private Double saldo;
 
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
-    private List<Transferencia> transferencia;
+    private List<Deposito> depositos;
 
     public ContaBancaria(){
 
@@ -30,8 +30,6 @@ public class ContaBancaria {
         this.saldo = saldo;
 
     }
-
-
 
     public Long getId() {
         return id;
@@ -48,6 +46,7 @@ public class ContaBancaria {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     public String getCpf() {
 
@@ -72,15 +71,7 @@ public class ContaBancaria {
         return saldo;
     }
 
-
-
-    public void deposito(double deposito){
-        saldo += deposito;
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
-
-    public void transferencia(double transferencia){
-        saldo -= transferencia;
-    }
-
-
 }
