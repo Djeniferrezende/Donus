@@ -8,4 +8,9 @@ public interface ContaBancariaRepository extends JpaRepository<ContaBancaria, Lo
 
     @Query(value = "Select p.* from tb_conta p ORDER BY p.numero_conta desc limit 1", nativeQuery = true)
     ContaBancaria OrderByNumeroConta();
+
+
+    boolean existsByCpf(String cpf);
+
+
 }

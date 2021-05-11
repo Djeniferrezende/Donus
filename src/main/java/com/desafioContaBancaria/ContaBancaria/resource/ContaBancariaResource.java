@@ -18,15 +18,13 @@ public class ContaBancariaResource {
 
     @GetMapping
     public ResponseEntity<List<ContaBancaria>> findAll(){
-        List<ContaBancaria> user = service.findAll();
-        return ResponseEntity.ok().body(user);
+        return ResponseEntity.ok().body(service.findAll());
     }
 
     //buscar por id
     @GetMapping("/{id}")
     public ResponseEntity<ContaBancaria> findById(@PathVariable Long id) {
-        ContaBancaria conta = service.findById(id);
-        return ResponseEntity.ok().body(conta);
+        return ResponseEntity.ok().body(service.findById(id));
 
     }
 
@@ -40,14 +38,13 @@ public class ContaBancariaResource {
     //precisa ser revisto
     @PutMapping(value ="/{id}")
     public ResponseEntity<ContaBancaria> update(@PathVariable Long id, @RequestBody ContaBancaria conta){
-        conta = service.update(id);
-        return ResponseEntity.ok().body(conta);
+        return ResponseEntity.ok().body(service.update(id));
     }
 
     @PostMapping
     public ResponseEntity<ContaBancaria> salvar(@RequestBody ContaBancaria conta){
-        conta = service.criarNovaConta(conta);
-        return ResponseEntity.ok(conta);
+
+        return ResponseEntity.ok().body(service.criarNovaConta(conta));
     }
 
 }
