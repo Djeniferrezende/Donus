@@ -46,5 +46,11 @@ public class ContaBancariaResource {
 
         return ResponseEntity.ok().body(service.criarNovaConta(conta));
     }
+/*
+    @PostMapping("/deposito")
+    public ResponseEntity<ContaBancaria> depositar( ContaBancaria conta, Double deposito ){
+        conta = service.deposito(deposito);
+        return ResponseEntity.ok().body(conta);
+*/
 
 }

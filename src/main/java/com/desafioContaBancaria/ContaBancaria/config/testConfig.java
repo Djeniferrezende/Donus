@@ -21,9 +21,9 @@ public class testConfig implements CommandLineRunner {
 
 
 
-        ContaBancaria u1 = new ContaBancaria(null, "Djenifer Rezende", "41756391874",10000,300.00);
-        ContaBancaria u2 = new ContaBancaria(null, "Jonatas Cabral", "123456789",10001,5000.00);
-        ContaBancaria u3 = new ContaBancaria(null, "Debora da Cunha", "26002880828",10002,7000.00);
+        ContaBancaria u1 = new ContaBancaria(null, "Djenifer","41756391874", 10000,5.000);
+        ContaBancaria u2 = new ContaBancaria(null, "Jonatas","123456789", 10001,7.000);
+        ContaBancaria u3 = new ContaBancaria(null, "Debora","26002880828", 10002,8.000);
 
         repository.saveAll(Arrays.asList(u1,u2,u3));
 

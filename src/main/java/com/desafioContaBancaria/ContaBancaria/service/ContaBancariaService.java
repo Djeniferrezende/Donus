@@ -64,7 +64,7 @@ public class ContaBancariaService {
     public ContaBancaria criarNovaConta(ContaBancaria conta) {
 
         // valida se a conta ja existe
-       boolean valida = repository.existsByCpf(conta.getCpf());
+        boolean valida = repository.existsByCpf(conta.getCpf());
         if(valida == true){
             throw new RuntimeException("CPF ja está cadastrado");
         }
@@ -73,7 +73,6 @@ public class ContaBancariaService {
         if (!ValidaCpf.ValidaCpf(conta.getCpf())) {
             throw new RuntimeException("cpf invalido");
         }
-
         // seta o numero da conta
         ContaBancaria ultimaConta = repository.OrderByNumeroConta();
         if (ultimaConta == null) {
@@ -84,6 +83,12 @@ public class ContaBancariaService {
 
         return repository.save(conta);
     }
+/*
+    public void deposito(ContaBancaria conta, Double deposito) {
+        if(deposito > 2000){
+            throw new RuntimeException("Valor de deposito superior ao permitido");
 
-
+        }
+         conta.deposito(deposito);
+    }*/
 }

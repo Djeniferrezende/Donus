@@ -1,6 +1,7 @@
 package com.desafioContaBancaria.ContaBancaria.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_conta")
@@ -14,6 +15,9 @@ public class ContaBancaria {
     private Integer numeroConta;
     private Double saldo;
 
+    @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
+    private List<Transferencia> transferencia;
+
     public ContaBancaria(){
 
     }
@@ -24,7 +28,10 @@ public class ContaBancaria {
         this.cpf = cpf;
         this.numeroConta = numeroConta;
         this.saldo = saldo;
+
     }
+
+
 
     public Long getId() {
         return id;
@@ -43,14 +50,17 @@ public class ContaBancaria {
     }
 
     public String getCpf() {
+
         return cpf;
     }
 
     public void setCpf(String cpf) {
+
         this.cpf = cpf;
     }
 
     public Integer getNumeroConta() {
+
         return numeroConta;
     }
 
@@ -62,7 +72,15 @@ public class ContaBancaria {
         return saldo;
     }
 
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
+
+
+    public void deposito(double deposito){
+        saldo += deposito;
     }
+
+    public void transferencia(double transferencia){
+        saldo -= transferencia;
+    }
+
+
 }
