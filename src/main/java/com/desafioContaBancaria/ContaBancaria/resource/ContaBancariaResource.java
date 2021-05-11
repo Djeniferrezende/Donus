@@ -36,4 +36,18 @@ public class ContaBancariaResource {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    //precisa ser revisto
+    @PutMapping(value ="/{id}")
+    public ResponseEntity<ContaBancaria> update(@PathVariable Long id, @RequestBody ContaBancaria conta){
+        conta = service.update(id);
+        return ResponseEntity.ok().body(conta);
+    }
+
+    @PostMapping
+    public ResponseEntity<ContaBancaria> salvar(@RequestBody ContaBancaria conta){
+        conta = service.criarNovaConta(conta);
+        return ResponseEntity.ok(conta);
+    }
+
 }

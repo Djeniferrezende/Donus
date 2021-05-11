@@ -1,11 +1,9 @@
 package com.desafioContaBancaria.ContaBancaria.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "tb_conta")
 public class ContaBancaria {
 
     @Id

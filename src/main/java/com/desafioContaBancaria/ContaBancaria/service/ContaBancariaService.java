@@ -1,5 +1,6 @@
 package com.desafioContaBancaria.ContaBancaria.service;
 
+import com.desafioContaBancaria.ContaBancaria.ValidaCpf;
 import com.desafioContaBancaria.ContaBancaria.entities.ContaBancaria;
 import com.desafioContaBancaria.ContaBancaria.repository.ContaBancariaRepository;
 import com.desafioContaBancaria.ContaBancaria.service.exceptions.DatabaseException;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +45,33 @@ public class ContaBancariaService {
             //usuario tem uma conta, a conta precisa ser deletada para deletar o usuario
             throw new DatabaseException(e.getMessage());
         }
+    }
+    //atualizar
+
+    public ContaBancaria update(Long id){
+        try{
+            ContaBancaria conta = repository.getOne(id);
+            conta.setNome(conta.getNome());
+            return conta;
+
+        }catch (EntityNotFoundException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Transactional
+    public ContaBancaria criarNovaConta(ContaBancaria conta){
+        if(!ValidaCpf.ValidaCpf(conta.getCpf())){
+            throw new RuntimeException("cpf invalido");
+        }
+        ContaBancaria ultimaConta = repository.OrderByNumeroConta();
+        if(ultimaConta == null){
+            conta.setNumeroConta(10000);
+        }else{
+            conta.setNumeroConta(ultimaConta.getNumeroConta() + 1);
+        }
+
+        return repository.save(conta);
     }
 
 }
