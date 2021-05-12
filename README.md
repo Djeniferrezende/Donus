@@ -18,3 +18,16 @@ Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num di
 
 cd "diretorio de sua preferencia"
 git clone https://github.com/condessalovelace/Donus
+
+
+para realizar uma transferencia passe na url 
+ 1- primeiro id de Origem
+ 2- nova-transferencia
+ 3- id de destino
+http://localhost:8080/conta/2/nova-transferencia/3
+
+via json passamos 
+
+{
+   "valor":10000.00    
+}
