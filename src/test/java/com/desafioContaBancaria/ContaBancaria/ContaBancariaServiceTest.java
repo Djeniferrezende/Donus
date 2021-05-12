@@ -2,8 +2,10 @@ package com.desafioContaBancaria.ContaBancaria;
 
 import com.desafioContaBancaria.ContaBancaria.entities.ContaBancaria;
 import com.desafioContaBancaria.ContaBancaria.entities.Deposito;
+import com.desafioContaBancaria.ContaBancaria.entities.Transferencia;
 import com.desafioContaBancaria.ContaBancaria.repository.ContaBancariaRepository;
 import com.desafioContaBancaria.ContaBancaria.repository.DepositoRepository;
+import com.desafioContaBancaria.ContaBancaria.repository.TransferenciaRepository;
 import com.desafioContaBancaria.ContaBancaria.service.ContaBancariaService;
 import com.desafioContaBancaria.ContaBancaria.service.exceptions.InvalidArgumentException;
 import org.assertj.core.api.Assertions;
@@ -17,6 +19,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
 
 //spring boot + Junit
 @RunWith(SpringRunner.class)
@@ -37,6 +41,9 @@ public class ContaBancariaServiceTest {
 
     @MockBean
     DepositoRepository depositoRepository;
+
+    @MockBean
+    TransferenciaRepository transferenciaRepository;
 
     @Autowired
     ContaBancariaService contaBancariaService;
@@ -88,18 +95,57 @@ public class ContaBancariaServiceTest {
     }
 
     @Test
-    public void depositonegativo(){
-        ContaBancaria conta = new ContaBancaria(null, "Leticia","13981666852",null,500.00);
-        Deposito deposito = new Deposito(null, -500.00,conta);
-        try{
+    public void depositonegativo() {
+        ContaBancaria conta = new ContaBancaria(null, "Leticia", "13981666852", null, 500.00);
+        Deposito deposito = new Deposito(null, -500.00, conta);
+        try {
             contaBancariaService.novoDeposito(conta, deposito);
-        }catch(InvalidArgumentException e){
+        } catch (InvalidArgumentException e) {
             Assert.assertEquals("Valor de deposito não pode ser negativo", e.getMessage());
 
         }
+    }
+        @Test
+        public void transferencia() {
+            ContaBancaria contaOrigem = new ContaBancaria(null, "Leticia", "13981666852", null, 500.00);
+            ContaBancaria contaDestino = new ContaBancaria(null, "Cristina", "42082227863", null, 5000.00);
+            Transferencia transferencia = new Transferencia(null, contaOrigem, contaDestino, 200.00);
+            try {
+                contaBancariaService.tranfere(contaOrigem, contaDestino, transferencia);
+            } catch (InvalidArgumentException e) {
+                Assert.assertEquals("Valor de transferencia não pode ser negativo", e.getMessage());
+
+            }
+        }
+
+    @Test
+    public void transferenciaSaldoInferior() {
+        ContaBancaria contaOrigem = new ContaBancaria(null, "Leticia", "13981666852", null, 500.00);
+        ContaBancaria contaDestino = new ContaBancaria(null, "Cristina", "42082227863", null, 5000.00);
+        Transferencia transferencia = new Transferencia(null, contaOrigem, contaDestino, 2000.00);
+        try {
+            contaBancariaService.tranfere(contaOrigem, contaDestino, transferencia);
+        } catch (InvalidArgumentException e) {
+            Assert.assertEquals("Saldo insuficiente para transferencia", e.getMessage());
+
+        }
+    }
+/*
+    @Test
+    public void transferenciarealizada_dadosSalvos() {
+        ContaBancaria contaOrigem = new ContaBancaria(null, "Leticia", "13981666852", null, 500.00);
+        ContaBancaria contaDestino = new ContaBancaria(null, "Cristina", "42082227863", null, 5000.00);
+        Transferencia transferencia = new Transferencia(null, contaOrigem, contaDestino, 2000.00);
+        Mockito.when(contaBancariaRepository.saveAll(Arrays.asList(contaOrigem,contaDestino))).thenReturn(null);
+
+
+    }*/
+
+
+
+
     }
 
 
 
 
-}
