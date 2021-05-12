@@ -93,8 +93,11 @@ public class ContaBancariaService {
     public void novoDeposito(ContaBancaria conta , Deposito deposito) {
         if( deposito.getValor() > 2000){
             throw new InvalidArgumentException("Valor de deposito superior ao permitido");
-
+        //verifica se o valor do deposito não é negativo
+        }if(deposito.getValor() < 0){
+            throw new InvalidArgumentException("Valor de deposito não pode ser negativo");
         }
+
         conta.setSaldo(conta.getSaldo() + deposito.getValor());
         deposito.setConta(conta);
         repository.save(conta);
