@@ -3,8 +3,10 @@ package com.desafioContaBancaria.ContaBancaria.service;
 import com.desafioContaBancaria.ContaBancaria.ValidaCpf;
 import com.desafioContaBancaria.ContaBancaria.entities.ContaBancaria;
 import com.desafioContaBancaria.ContaBancaria.entities.Deposito;
+import com.desafioContaBancaria.ContaBancaria.entities.Transferencia;
 import com.desafioContaBancaria.ContaBancaria.repository.ContaBancariaRepository;
 import com.desafioContaBancaria.ContaBancaria.repository.DepositoRepository;
+import com.desafioContaBancaria.ContaBancaria.repository.TransferenciaRepository;
 import com.desafioContaBancaria.ContaBancaria.service.exceptions.DatabaseException;
 import com.desafioContaBancaria.ContaBancaria.service.exceptions.InvalidArgumentException;
 import com.desafioContaBancaria.ContaBancaria.service.exceptions.ResourceNotFoundException;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +30,9 @@ public class ContaBancariaService {
 
     @Autowired
     private DepositoRepository depositoRepository;
+
+    @Autowired
+    private TransferenciaRepository transferenciaRepository;
 
     //listar contas
     public List<ContaBancaria> findAll() {
@@ -71,7 +77,7 @@ public class ContaBancariaService {
 
         // valida se a conta ja existe
         boolean valida = repository.existsByCpf(conta.getCpf());
-        if(valida == true){
+        if (valida == true) {
             throw new RuntimeException("CPF ja está cadastrado");
         }
 
@@ -90,11 +96,12 @@ public class ContaBancariaService {
         return repository.save(conta);
     }
 
-    public void novoDeposito(ContaBancaria conta , Deposito deposito) {
-        if( deposito.getValor() > 2000){
+    public void novoDeposito(ContaBancaria conta, Deposito deposito) {
+        if (deposito.getValor() > 2000) {
             throw new InvalidArgumentException("Valor de deposito superior ao permitido");
-        //verifica se o valor do deposito não é negativo
-        }if(deposito.getValor() < 0){
+            //verifica se o valor do deposito não é negativo
+        }
+        if (deposito.getValor() < 0) {
             throw new InvalidArgumentException("Valor de deposito não pode ser negativo");
         }
 
@@ -105,12 +112,34 @@ public class ContaBancariaService {
     }
 
     //listar contas
-    public List<Deposito> findAllDepositos(){
+    public List<Deposito> findAllDepositos() {
         return depositoRepository.findAll();
     }
 
-    public List<Deposito> findDepositosByConta(Long id){
+    public List<Deposito> findDepositosByConta(Long id) {
         return depositoRepository.findByContaId(id);
     }
 
+    //transferencia
+    public void tranfere(ContaBancaria contaOrigem, ContaBancaria contaDestino, Transferencia transferencia) {
+        if (transferencia.getValor() < 0) {
+            throw new InvalidArgumentException("Valor de transferencia inferior ao permitido");
+        }
+        if (contaOrigem.getSaldo() < transferencia.getValor()) {
+            throw new InvalidArgumentException("Saldo insuficiente para transferencia");
+        }
+        contaOrigem.setSaldo(contaOrigem.getSaldo() - transferencia.getValor());
+        contaDestino.setSaldo(contaDestino.getSaldo() + transferencia.getValor());
+
+        transferencia.setContaOrigem(contaOrigem);
+        transferencia.setContaDestino(contaDestino);
+        repository.saveAll(Arrays.asList(contaOrigem, contaDestino));
+        transferenciaRepository.save(transferencia);
+
+    }
+
 }
+
+
+
+

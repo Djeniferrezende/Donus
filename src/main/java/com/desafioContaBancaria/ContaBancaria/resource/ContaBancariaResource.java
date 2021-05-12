@@ -2,6 +2,7 @@ package com.desafioContaBancaria.ContaBancaria.resource;
 
 import com.desafioContaBancaria.ContaBancaria.entities.ContaBancaria;
 import com.desafioContaBancaria.ContaBancaria.entities.Deposito;
+import com.desafioContaBancaria.ContaBancaria.entities.Transferencia;
 import com.desafioContaBancaria.ContaBancaria.service.ContaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +54,13 @@ public class ContaBancariaResource {
     @GetMapping("{id}/depositos")
     public ResponseEntity<List<Deposito>> depositos(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findDepositosByConta(id));
+    }
+
+    @PostMapping("{idOrigem}/nova-transferencia/{idDestino}")
+    public ResponseEntity<Transferencia> transferir(@PathVariable Long idOrigem,@PathVariable Long idDestino, @RequestBody Transferencia transferencia) {
+        ContaBancaria contaOrigem = service.findById(idOrigem);
+        ContaBancaria contaDestino = service.findById(idDestino);
+        service.tranfere(contaOrigem, contaDestino, transferencia);
+        return ResponseEntity.ok().body(transferencia);
     }
 }

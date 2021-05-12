@@ -3,7 +3,7 @@ package com.desafioContaBancaria.ContaBancaria.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tb_transferencia")
+@Table(name = "tb_deposito")
 public class Deposito {
 
     @Id

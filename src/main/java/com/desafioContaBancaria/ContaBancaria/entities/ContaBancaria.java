@@ -18,6 +18,12 @@ public class ContaBancaria {
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
     private List<Deposito> depositos;
 
+    @OneToMany(mappedBy = "contaOrigem", cascade = CascadeType.ALL)
+    private List<Transferencia> transferenciasRealizadas;
+
+    @OneToMany(mappedBy = "contaDestino", cascade = CascadeType.ALL)
+    private List<Transferencia> transferenciasRecebidas;
+
     public ContaBancaria(){
 
     }
@@ -74,4 +80,6 @@ public class ContaBancaria {
     public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
+
+
 }

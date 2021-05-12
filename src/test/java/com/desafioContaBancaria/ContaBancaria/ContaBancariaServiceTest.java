@@ -45,7 +45,6 @@ public class ContaBancariaServiceTest {
     public void cpfJaExiste(){
         ContaBancaria conta = new ContaBancaria(null, "Leticia","13981666852",null,500.00);
         Mockito.when(contaBancariaRepository.existsByCpf(conta.getCpf())).thenReturn(true);
-
         try{
             contaBancariaService.criarNovaConta(conta);
         }catch(RuntimeException e){
@@ -58,7 +57,6 @@ public class ContaBancariaServiceTest {
     public void cpfInvalido(){
         ContaBancaria conta = new ContaBancaria(null, "Leticia","13981666850",null,500.00);
         Mockito.when(contaBancariaRepository.existsByCpf(conta.getCpf())).thenReturn(false);
-
         try{
             contaBancariaService.criarNovaConta(conta);
         }catch(RuntimeException e){
@@ -73,19 +71,14 @@ public class ContaBancariaServiceTest {
         Mockito.when(contaBancariaRepository.existsByCpf(conta.getCpf())).thenReturn(false);
         Mockito.when(contaBancariaRepository.OrderByNumeroConta()).thenReturn(null);
         Mockito.when(contaBancariaRepository.save(conta)).thenReturn(null);
-
         contaBancariaService.criarNovaConta(conta);
         Assert.assertEquals(10000, (long) conta.getNumeroConta());
     }
 
     @Test
     public void depositoSuperiora2000(){
-
-
         ContaBancaria conta = new ContaBancaria(null, "Leticia","13981666852",null,500.00);
         Deposito deposito = new Deposito(null, 2500.00,conta);
-
-
         try{
             contaBancariaService.novoDeposito(conta, deposito);
         }catch(InvalidArgumentException e){
@@ -94,12 +87,19 @@ public class ContaBancariaServiceTest {
         }
     }
 
+    @Test
+    public void depositonegativo(){
+        ContaBancaria conta = new ContaBancaria(null, "Leticia","13981666852",null,500.00);
+        Deposito deposito = new Deposito(null, -500.00,conta);
+        try{
+            contaBancariaService.novoDeposito(conta, deposito);
+        }catch(InvalidArgumentException e){
+            Assert.assertEquals("Valor de deposito não pode ser negativo", e.getMessage());
 
-
-
-    @Before
-    public void setup(){
+        }
     }
+
+
 
 
 }
