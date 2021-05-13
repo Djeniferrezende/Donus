@@ -77,21 +77,18 @@ Lembre-se de comentar novamente as 4 linhas para nao gerar duplicidade no arquiv
 
 http://localhost:8080/conta/
 
+![image](https://user-images.githubusercontent.com/47535167/118136170-32b69100-b3da-11eb-82fc-507df7655287.png)
+
+
 #####Para trazer uma conta com seu respectivo id(GET)
 
 1- digite o id
 
 http://localhost:8080/conta/3
 
-ele retornara assim:
+![image](https://user-images.githubusercontent.com/47535167/118136228-4235da00-b3da-11eb-83d4-88c2bd2d78ce.png)
 
-{
-    "id": 3,
-    "nome": "Debora",
-    "cpf": "26002880828",
-    "numeroConta": 10002,
-    "saldo": 8000.0
-}
+
 
 #####Para realizar um deposito passe na url(POST)
 
@@ -100,12 +97,7 @@ ele retornara assim:
 
 http://localhost:8080/conta/1/novo-deposito(POST)
 
-como json: 
-
-{
-   "valor":2000.00 
-    
-}
+![image](https://user-images.githubusercontent.com/47535167/118136344-642f5c80-b3da-11eb-9bf7-7f52756a7545.png)
 
 
 ##### Para realizar uma transferencia passe na url 
@@ -114,6 +106,7 @@ como json:
  3- id de destino
 http://localhost:8080/conta/2/nova-transferencia/3
 
-via json passamos 
+![image](https://user-images.githubusercontent.com/47535167/118136490-8d4fed00-b3da-11eb-9a27-ed41b60ebbf4.png)
 
-![image](https://user-images.githubusercontent.com/47535167/118131623-22e87e00-b3d5-11eb-9496-d830d5bc5d42.png)
+
+
