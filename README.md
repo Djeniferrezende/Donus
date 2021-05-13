@@ -14,6 +14,11 @@ Para executar o projeto, será necessário os seguintes programas:
 4. Postman
 5. Postgresql 12 e pgAdmin (o projeto foi desenvolvido em teste usando o banco de dados h2, em dev no prostgress).
 
+Para utilizar via banco h2 o application.properties precisa estar com a nomenclatura de test
+
+![image](https://user-images.githubusercontent.com/47535167/118131171-8d4cee80-b3d4-11eb-8d21-bd9150d2d851.png)
+
+
 #####Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num diretório de sua preferência:
 
 cd "diretorio de sua preferencia"
