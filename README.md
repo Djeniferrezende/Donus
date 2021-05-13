@@ -20,14 +20,17 @@ Para utilizar via banco h2 o application.properties precisa estar com a nomencla
 
 Na configuração para utilizar o h2 que esta no application-test.properties tem como padrao o username:sa e senha:"", caso na sua maquina esteja com a configuração diferente favor alterar no codico com seus acessos.
 
+![image](https://user-images.githubusercontent.com/47535167/118134994-e4ed5900-b3d8-11eb-9836-611317481992.png)
+
 Para acessar o H2 basta executar o projeto e colocar na URL http://localhost:8080/h2-console como consta no detalhamento da imagem.
 Acesse com o usuario e senha.
+
 
 ![image](https://user-images.githubusercontent.com/47535167/118135401-5b8a5680-b3d9-11eb-9788-cb577e2737a3.png)
 
 ** não há necessidade de criação de tabelas visto que o spring faz de maneira automatica.
 
-![image](https://user-images.githubusercontent.com/47535167/118134994-e4ed5900-b3d8-11eb-9836-611317481992.png)
+
 
 
 Ja para usar via dev no postgress o application.properties deve ser alterado para:
