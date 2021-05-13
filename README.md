@@ -22,6 +22,26 @@ Ja para usar via dev no postgress o application.properties deve ser alterado par
 
 ![image](https://user-images.githubusercontent.com/47535167/118131474-f0d71c00-b3d4-11eb-949f-11d76ce4c1b6.png)
 
+Na configuração para utilizar o postgress que esta no application-dev.properties tem como padrao o username:postgress e senha:1234567, caso na sua maquina esteja com a configuração diferente favor alterar no codico com seus acessos.
+![image](https://user-images.githubusercontent.com/47535167/118132345-f8e38b80-b3d5-11eb-886c-af45b3f3183b.png)
+
+No pgAdmin foi utilizado o postgreSQL 12 e foi criado um banco de dados com o nome de contaBancaria ( para criar a dataBase basta clicar em postgreSql >databases:create database)
+
+Para gerar o arquivo de "create.sql" para ser utilizado no postgress basca descomentar as 4 primeiras linhas do application-dev.properties e executar novamente.
+
+![image](https://user-images.githubusercontent.com/47535167/118133239-fa618380-b3d6-11eb-8d68-e74903dd6cf8.png)
+
+. dentro da pasta do projeto sera criado um arquivo chamado "create.sql", enconstraremos a criação das tabelas de maneira automatica.
+![image](https://user-images.githubusercontent.com/47535167/118133655-75c33500-b3d7-11eb-8fbb-a7d2c3080d9e.png)
+
+Copie a informação que vem dentro do arquivo e execute no pgadmin.
+
+###Importante 
+
+Lembre-se de comentar novamente as 4 linhas para nao gerar duplicidade no arquivo.
+
+
+
 
 
 #####Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num diretório de sua preferência:
