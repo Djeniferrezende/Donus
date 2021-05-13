@@ -16,7 +16,12 @@ Para executar o projeto, será necessário os seguintes programas:
 
 Para utilizar via banco h2 o application.properties precisa estar com a nomenclatura de test
 
-![image](https://user-images.githubusercontent.com/47535167/118131171-8d4cee80-b3d4-11eb-8d21-bd9150d2d851.png)
+![image](https://user-images.githubusercontent.com/47535167/118131362-d4d37a80-b3d4-11eb-8935-1104b37f209f.png)
+
+Ja para usar via dev no postgress o application.properties deve ser alterado para:
+
+![image](https://user-images.githubusercontent.com/47535167/118131474-f0d71c00-b3d4-11eb-949f-11d76ce4c1b6.png)
+
 
 
 #####Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num diretório de sua preferência:
@@ -67,6 +72,4 @@ http://localhost:8080/conta/2/nova-transferencia/3
 
 via json passamos 
 
-{
-   "valor":10000.00    
-}
+![image](https://user-images.githubusercontent.com/47535167/118131623-22e87e00-b3d5-11eb-9496-d830d5bc5d42.png)
