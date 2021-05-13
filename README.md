@@ -14,6 +14,11 @@ Para executar o projeto, será necessário os seguintes programas:
 4. Postman
 5. Postgresql 12 e pgAdmin (o projeto foi desenvolvido em teste usando o banco de dados h2, em dev no prostgress).
 
+#####Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num diretório de sua preferência:
+
+cd "diretorio de sua preferencia"
+git clone https://github.com/condessalovelace/Donus
+
 Para utilizar via banco h2 o application.properties precisa estar com a nomenclatura de test
 
 ![image](https://user-images.githubusercontent.com/47535167/118131362-d4d37a80-b3d4-11eb-8935-1104b37f209f.png)
@@ -50,13 +55,13 @@ Para gerar o arquivo de "create.sql" para ser utilizado no postgress basca desco
 ![image](https://user-images.githubusercontent.com/47535167/118133655-75c33500-b3d7-11eb-8fbb-a7d2c3080d9e.png)
 
 Copie a informação que vem dentro do arquivo e execute no pgadmin.
- 1- va dentro do banco criado
- 2- Schemas
- 3- tables
- 4- query tool
- 5- colocar as informações que vieram do create.sql
+ 1. va dentro do banco criado
+ 2. Schemas
+ 3. tables
+ 4. query tool
+ 5. colocar as informações que vieram do create.sql
  
- Pronto as tabelas já estçao criadas. 
+ Pronto as tabelas já estao criadas. 
 
 ###Importante 
 
@@ -66,10 +71,7 @@ Lembre-se de comentar novamente as 4 linhas para nao gerar duplicidade no arquiv
 
 
 
-#####Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num diretório de sua preferência:
 
-cd "diretorio de sua preferencia"
-git clone https://github.com/condessalovelace/Donus
 
 #####Para listar todas as contas(GET)
 
