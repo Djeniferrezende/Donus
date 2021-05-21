@@ -120,6 +120,8 @@ Lembre-se de comentar novamente as 4 linhas para nao gerar duplicidade no arquiv
 
 Collection postman: [https://www.getpostman.com/collections/55ef2817ad3babdc20b0](https://www.getpostman.com/collections/55ef2817ad3babdc20b0)
 
+A documentação foi feia no swagger e pode ser acessado com [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
 
 
 
